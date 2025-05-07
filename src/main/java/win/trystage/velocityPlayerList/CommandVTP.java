@@ -38,7 +38,7 @@ public class CommandVTP implements SimpleCommand {
             Player player = (Player) source;
             if (player.hasPermission("vpl.teleport")) {
                 // null player name
-                if (args[0] == null){
+                if (args.length == 0){
                     player.sendMessage(getMiniMessage().deserialize(getConfig().getString("vtp-usage")));
                 }
                 Optional<Player> targets = getProxyServer().getPlayer(args[0]);
