@@ -40,6 +40,7 @@ public class CommandVTP implements SimpleCommand {
                 // null player name
                 if (args.length == 0){
                     player.sendMessage(getMiniMessage().deserialize(getConfig().getString("vtp-usage")));
+                    return;
                 }
                 Optional<Player> targets = getProxyServer().getPlayer(args[0]);
                 if (targets.isEmpty()){

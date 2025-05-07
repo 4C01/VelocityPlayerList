@@ -9,6 +9,7 @@ import com.velocitypowered.api.proxy.server.ServerInfo;
 import net.kyori.adventure.text.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static win.trystage.velocityPlayerList.VelocityPlayerList.*;
@@ -39,9 +40,13 @@ public class CommandOnlines implements SimpleCommand {
             Player player = (Player) source;
             if (player.hasPermission("vpl.onlines")) {
                 if (args.length > 0){
+                    Optional<RegisteredServer> server = getProxyServer().getServer(args[0]);
+                    if (server.isEmpty()){
+                        player.sendMessage(getMiniMessage().deserialize(getConfig().getString("server-not-exists").replace("{server}",args[0])));
+                    }
                     player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.onlines")
-                            .replace("{count}", String.valueOf(getProxyServer().getServer(args[0]).get().getPlayersConnected().size()))));
-                    String playerNames = getProxyServer().getServer(args[0]).get().getPlayersConnected().stream()
+                            .replace("{count}", String.valueOf(server.get().getPlayersConnected().size()))));
+                    String playerNames = server.get().getPlayersConnected().stream()
                             .map(Player::getUsername)
                             .collect(Collectors.joining(", "));
                     player.sendMessage(Component.text(playerNames));
