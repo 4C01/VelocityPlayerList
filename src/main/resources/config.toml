@@ -51,3 +51,5 @@ console-run-command = "<red>Only player can run this command."
 noperm-run-command = "<red>You do not have permission to run this command."
 
 server-not-exists = "<red>Server does not exist"
+
+reloaded = "<green>VelocityPlayerList: config reloaded"

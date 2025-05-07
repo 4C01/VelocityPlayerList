@@ -21,10 +21,10 @@ import java.nio.file.Path;
 
 @Plugin(id = "velocity-player-list", name = "VelocityPlayerList", version = "1.0-SNAPSHOT", description = "show velocity player list", authors = {"TrystageBedwars", "zyghit"})
 public class VelocityPlayerList {
-    private Logger logger;
+    private static Logger logger;
     private static ProxyServer proxyServer;
     private static MiniMessage miniMessage = MiniMessage.miniMessage();
-    private Path dataDirectory;
+    private static Path dataDirectory;
     private static Toml config;
     @Inject
     public VelocityPlayerList(Logger logger, @DataDirectory Path dataDirectory, ProxyServer proxyServer, CommandManager commandManager){
@@ -45,12 +45,12 @@ public class VelocityPlayerList {
     public void onProxyInitialization(ProxyInitializeEvent event) {
         loadConfig();
     }
-    private void loadConfig() {
+    public static void loadConfig() {
         try {
             File configFile = new File(dataDirectory.toFile(), "config.toml");
             if (!configFile.exists()) {
                 configFile.getParentFile().mkdirs();
-                Files.copy(getClass().getResourceAsStream("/config.toml"), configFile.toPath());
+                Files.copy(VelocityPlayerList.class.getResourceAsStream("/config.toml"), configFile.toPath());
             }
             config = new Toml().read(configFile);
 
