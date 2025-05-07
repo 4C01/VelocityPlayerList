@@ -3,13 +3,31 @@ package win.trystage.velocityPlayerList;
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.command.SimpleCommand;
 import com.velocitypowered.api.proxy.Player;
+import com.velocitypowered.api.proxy.server.RegisteredServer;
+import com.velocitypowered.api.proxy.server.ServerInfo;
+
 import net.kyori.adventure.text.Component;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static win.trystage.velocityPlayerList.VelocityPlayerList.*;
 
 public class CommandOnlines implements SimpleCommand {
+    @Override
+    public List<String> suggest(Invocation invocation) {
+        String[] args = invocation.arguments();
+
+        if (args.length == 1) {
+            String partialName = args[0].toLowerCase();
+            return getProxyServer().getAllServers().stream()
+                    .map(RegisteredServer::getServerInfo)
+                    .map(ServerInfo::getName)
+                    .filter(name -> name.toLowerCase().startsWith(partialName))
+                    .collect(Collectors.toList());
+        }
+        return List.of();
+    }
     @Override
     public void execute(Invocation invocation) {
         // 获取命令执行者

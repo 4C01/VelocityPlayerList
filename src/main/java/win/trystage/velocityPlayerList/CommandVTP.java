@@ -18,7 +18,6 @@ public class CommandVTP implements SimpleCommand {
     public List<String> suggest(Invocation invocation) {
         String[] args = invocation.arguments();
 
-        // 只在第一个参数提供玩家名补全
         if (args.length == 1) {
             String partialName = args[0].toLowerCase();
             return getProxyServer().getAllPlayers().stream()
@@ -26,7 +25,7 @@ public class CommandVTP implements SimpleCommand {
                     .filter(name -> name.toLowerCase().startsWith(partialName))
                     .collect(Collectors.toList());
         }
-        return List.of(); // 其他参数不提供补全
+        return List.of();
     }
     @Override
     public void execute(Invocation invocation) {
