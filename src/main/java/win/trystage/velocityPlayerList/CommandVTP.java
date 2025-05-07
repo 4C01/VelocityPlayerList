@@ -29,12 +29,12 @@ public class CommandVTP implements SimpleCommand {
                 Optional<Player> targets = getProxyServer().getPlayer(args[0]);
                 if (targets.isEmpty()){
                     //skip
-                    player.sendMessage(getMiniMessage().deserialize(getConfig().getString("null-player")));
+                    player.sendMessage(getMiniMessage().deserialize(getConfig().getString("null-player").replace("{player}",player.getUsername())));
                     return;
                 }
                 Optional<ServerConnection> target = targets.get().getCurrentServer();
                 if (target.isEmpty()){
-                    player.sendMessage(getMiniMessage().deserialize(getConfig().getString("teleport-failed")));
+                    player.sendMessage(getMiniMessage().deserialize(getConfig().getString("teleport-failed").replace("{player}",player.getUsername())));
                     return;
                 }
                 RegisteredServer targetServer = target.get().getServer();
@@ -42,12 +42,11 @@ public class CommandVTP implements SimpleCommand {
                 player.createConnectionRequest(targetServer).connect()
                         .thenAccept(result -> {
                             if (result.isSuccessful()) {
-                                player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.teleport")));
+                                player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.teleport").replace("{player}",player.getUsername())));
                             } else {
-                                player.sendMessage(getMiniMessage().deserialize(getConfig().getString("teleport-failed")));
+                                player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.teleport-failed").replace("{player}",player.getUsername())));
                             }
                         });
-                player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.teleport")));
             } else {
                 player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.noperm-run-command")));
             }
