@@ -40,7 +40,7 @@ public class CommandOnlines implements SimpleCommand {
             if (player.hasPermission("vpl.onlines")) {
                 if (args.length > 0){
                     player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.onlines")
-                            .replace("{count}", String.valueOf(getProxyServer().getPlayerCount()))));
+                            .replace("{count}", String.valueOf(getProxyServer().getServer(args[0]).get().getPlayersConnected().size()))));
                     String playerNames = getProxyServer().getServer(args[0]).get().getPlayersConnected().stream()
                             .map(Player::getUsername)
                             .collect(Collectors.joining(", "));
