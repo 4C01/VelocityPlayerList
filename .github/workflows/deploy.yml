@@ -31,12 +31,12 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local_dir: VelocityPlayerList/target
+          local_dir: target
           remote_dir: 4C01/VelocityPlayerList
       - name: Create Tag
         uses: softprops/action-gh-release@v1
         with:
-          files: VelocityPlayerList/target/VelocityPlayerList-${{env.UPDATE_VERSION}}.jar
+          files: target/VelocityPlayerList-${{env.UPDATE_VERSION}}.jar
           generate_release_notes: true
           name: ${{env.UPDATE_VERSION}}
           tag_name: ${{env.UPDATE_VERSION}}
