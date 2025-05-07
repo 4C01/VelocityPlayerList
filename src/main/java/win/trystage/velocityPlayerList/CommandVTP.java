@@ -45,12 +45,12 @@ public class CommandVTP implements SimpleCommand {
                 Optional<Player> targets = getProxyServer().getPlayer(args[0]);
                 if (targets.isEmpty()){
                     //skip
-                    player.sendMessage(getMiniMessage().deserialize(getConfig().getString("null-player").replace("{player}",player.getUsername())));
+                    player.sendMessage(getMiniMessage().deserialize(getConfig().getString("null-player").replace("{player}",args[0])));
                     return;
                 }
                 Optional<ServerConnection> target = targets.get().getCurrentServer();
                 if (target.isEmpty()){
-                    player.sendMessage(getMiniMessage().deserialize(getConfig().getString("teleport-failed").replace("{player}",player.getUsername())));
+                    player.sendMessage(getMiniMessage().deserialize(getConfig().getString("teleport-failed").replace("{player}",args[0])));
                     return;
                 }
                 RegisteredServer targetServer = target.get().getServer();
@@ -58,9 +58,9 @@ public class CommandVTP implements SimpleCommand {
                 player.createConnectionRequest(targetServer).connect()
                         .thenAccept(result -> {
                             if (result.isSuccessful()) {
-                                player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.teleport").replace("{player}",player.getUsername())));
+                                player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.teleport").replace("{player}",args[0])));
                             } else {
-                                player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.teleport-failed").replace("{player}",player.getUsername())));
+                                player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.teleport-failed").replace("{player}",args[0])));
                             }
                         });
             } else {
