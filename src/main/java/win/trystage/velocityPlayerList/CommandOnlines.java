@@ -42,7 +42,7 @@ public class CommandOnlines implements SimpleCommand {
                 if (args.length > 0){
                     Optional<RegisteredServer> server = getProxyServer().getServer(args[0]);
                     if (server.isEmpty()){
-                        player.sendMessage(getMiniMessage().deserialize(getConfig().getString("server-not-exists").replace("{server}",args[0])));
+                        player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.server-not-exists").replace("{server}",args[0])));
                     }
                     player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.onlines")
                             .replace("{count}", String.valueOf(server.get().getPlayersConnected().size()))));

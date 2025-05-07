@@ -39,18 +39,18 @@ public class CommandVTP implements SimpleCommand {
             if (player.hasPermission("vpl.teleport")) {
                 // null player name
                 if (args.length == 0){
-                    player.sendMessage(getMiniMessage().deserialize(getConfig().getString("vtp-usage")));
+                    player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.vtp-usage")));
                     return;
                 }
                 Optional<Player> targets = getProxyServer().getPlayer(args[0]);
                 if (targets.isEmpty()){
                     //skip
-                    player.sendMessage(getMiniMessage().deserialize(getConfig().getString("null-player").replace("{player}",args[0])));
+                    player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.null-player").replace("{player}",args[0])));
                     return;
                 }
                 Optional<ServerConnection> target = targets.get().getCurrentServer();
                 if (target.isEmpty()){
-                    player.sendMessage(getMiniMessage().deserialize(getConfig().getString("teleport-failed").replace("{player}",args[0])));
+                    player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.teleport-failed").replace("{player}",args[0])));
                     return;
                 }
                 RegisteredServer targetServer = target.get().getServer();
