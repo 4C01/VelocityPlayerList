@@ -20,6 +20,15 @@ public class CommandOnlines implements SimpleCommand {
         if (source instanceof Player) {
             Player player = (Player) source;
             if (player.hasPermission("vpl.onlines")) {
+                if (args.length > 0){
+                    player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.onlines")
+                            .replace("{count}", String.valueOf(getProxyServer().getPlayerCount()))));
+                    String playerNames = getProxyServer().getServer(args[0]).get().getPlayersConnected().stream()
+                            .map(Player::getUsername)
+                            .collect(Collectors.joining(", "));
+                    player.sendMessage(Component.text(playerNames));
+                    return;
+                }
                 player.sendMessage(getMiniMessage().deserialize(getConfig().getString("message.onlines")
                         .replace("{count}", String.valueOf(getProxyServer().getPlayerCount()))));
                 String playerNames = getProxyServer().getAllPlayers().stream()
