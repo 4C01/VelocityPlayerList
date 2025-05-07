@@ -9,33 +9,45 @@
 #  ████░░░░░░████ ██░░██         ██░░██████████
 #    ████░░████   ██░░██         ██░░░░░░░░░░██
 #      ██████     ██████         ██████████████
+#
+# VelocityPlayerList 1.0 by TrystageBedwars
+# Website: https://github.com/4C01/VelocityPlayerList
+#
+# Thanks for using VelocityPlayerList!  |  TrystageBedwars
+#
+#
+# Permission:
+#
+# Saw the player join/leave message
+# permission: vpl.announce
+#
+# command: /vtp <player>
+# permission: vpl.teleport
+#
+# command: /onlines
+# permission: vpl.onlines
 [options]
 
 player-join-notify = true
-
 player-leave-notify = true
 
 [message]
 
-# require vpl.announce permission
+split-format = ","
+
 join = "<gray>[<green>+<gray>] {player}"
 leave = "<gray>[<red>-<gray>] {player}"
 
-# require vpl.teleport permission
-teleport = "<gray>[<yellow>↑<gray>] {player}..."
-teleport-failed = "<red>Failed to teleport to target player's server"
-
-# require vpl.onlines permission
 onlines = "<green>Theres {count} players online"
-
-split-format = ","
 
 vtp-usage = "<red>Usage: /vtp <player>"
 
 null-player = "<red>Theres no player that name"
 
-console-run-command = "<red>Only player can run this command."
+teleport = "<gray>[<yellow>↑<gray>] {player}..."
+teleport-failed = "<red>Failed to teleport to target player's server"
 
+console-run-command = "<red>Only player can run this command."
 noperm-run-command = "<red>You do not have permission to run this command."
 
 server-not-exists = "<red>Server does not exist"
