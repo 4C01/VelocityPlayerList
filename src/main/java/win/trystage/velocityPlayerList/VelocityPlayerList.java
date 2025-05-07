@@ -39,6 +39,10 @@ public class VelocityPlayerList {
                 commandManager.metaBuilder("vtp").build(), // 命令元数据
                 new CommandVTP()
         );
+        commandManager.register(
+                commandManager.metaBuilder("vpl").build(), // 命令元数据
+                new CommandVPL()
+        );
     }
 
     @Subscribe
